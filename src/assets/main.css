@@ -1,0 +1,99 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+h1, h2 {
+    font-weight: normal;
+}
+
+.header-container {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 35px 0;
+}
+
+header h1 {
+    margin: 0;
+    margin-left: 80px;
+}
+
+.navigation ul {
+    list-style: none;
+}
+
+.navigation li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.main-content {
+    padding: 50px 0;
+}
+
+.main-content h2 {
+    color: #333;
+}
+
+.main-content p {
+    color: #555;
+    font-size: 18px;
+}
+
+.greeting-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.poll-container, .poll-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.poll-form .default-button {
+    margin-top: 5px;
+}
+
+.answer {
+    padding-bottom: 20px;
+}
+
+.default-button {
+    display: inline-block;
+    background-color: #ffffff;
+    padding: 15px 30px;
+    color: #030303;
+    border: 2px solid #030303;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+}
+
+.default-button:hover {
+    background-color: #030303;
+    color: #ffffff;
+}
+
+.header-button {
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    text-decoration: none;
+    padding: 12px 22px;
+    transition: background-color 0.5s ease;
+}
+
+.header-button:hover {
+    background-color: #ffffff;
+    color: #030303;
+}
+
