@@ -3,5 +3,7 @@
 </script>
 
 <template>
-    <LoginForm/>
+    <div class="auth-block">
+        <LoginForm/>
+    </div>
 </template>

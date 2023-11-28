@@ -5,8 +5,12 @@ body {
     background-color: #ffffff;
 }
 
-h1, h2 {
+h1, h2, .logo-text {
     font-weight: normal;
+}
+
+a {
+    text-decoration: none;
 }
 
 .header-container {
@@ -19,13 +23,16 @@ h1, h2 {
 
 header {
     background-color: #1a1a1a;
-    color: #fff;
     padding: 35px 0;
 }
 
-header h1 {
+.logo-text {
     margin: 0;
     margin-left: 80px;
+}
+
+.logo-text a {
+    color: #ffffff;
 }
 
 .navigation ul {
@@ -75,8 +82,9 @@ header h1 {
     padding: 15px 30px;
     color: #030303;
     border: 2px solid #030303;
-    text-decoration: none;
+    border-radius: 2px;
     transition: background-color 0.5s ease;
+    font-size: 16px;
 }
 
 .default-button:hover {
@@ -87,13 +95,21 @@ header h1 {
 .header-button {
     color: #ffffff;
     border: 2px solid #ffffff;
-    text-decoration: none;
     padding: 12px 22px;
+    border-radius: 2px;
     transition: background-color 0.5s ease;
 }
 
 .header-button:hover {
     background-color: #ffffff;
     color: #030303;
+}
+
+.links-btns {
+    display: flex;
+    justify-content: space-around;
+    width: 580px;
+    margin: auto;
+    margin-top: 35px;
 }
 

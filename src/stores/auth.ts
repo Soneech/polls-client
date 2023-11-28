@@ -53,6 +53,9 @@ export const useAuthStore = defineStore({
 
                 let signInBtn = document.getElementById('sign-in-btn');
                 signInBtn.style.visibility = "hidden";
+
+                let signUpBtn = document.getElementById('sign-up-btn');
+                signUpBtn.style.visibility = "hidden";
             } else {
                 // TODO - вывод ошибок от сервера
             }
@@ -70,6 +73,9 @@ export const useAuthStore = defineStore({
 
             let signInBtn = document.getElementById('sign-in-btn');
             signInBtn.style.visibility = "visible";
+
+            let signUpBtn = document.getElementById('sign-up-btn');
+            signUpBtn.style.visibility = "visible";
         }
     }
 });

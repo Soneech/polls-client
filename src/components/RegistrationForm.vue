@@ -15,21 +15,12 @@ import { useAuthStore } from '@/stores/auth';
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit">
-        <div>
-            <label for="name">Введите логин</label>
-            <input type="text" id="name" placeholder="Логин" v-model="user.name">
-        </div>
-        <div>
-            <label for="email">Введите почту</label>
-            <input type="text" id="email" placeholder="Почта" v-model="user.email">
-        </div>
-        <div>
-            <label for="password">Введите пароль</label>
-            <input type="password" id="password" placeholder="Пароль" v-model="user.password">
-        </div>
-        <div>
-            <button type="submit">Войти</button>
-        </div>
+    <form @submit.prevent="onSubmit" class="auth-form">
+        <h2 class="form-title">Введите данные аккаунта</h2>
+
+        <input type="text" id="name" class="form-input" placeholder="Логин" v-model="user.name">
+        <input type="text" id="email" class="form-input" placeholder="Почта" v-model="user.email">
+        <input type="password" id="password" class="form-input" placeholder="Пароль" v-model="user.password">
+        <button type="submit" class="default-button form-button sign-up-form-btn">Зарегистрироваться</button>
   </form>
 </template>

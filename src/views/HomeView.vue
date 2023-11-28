@@ -6,7 +6,11 @@
         <div class="greeting-container">
             <h2>Добро пожаловать!</h2>
             <p>На нашем сайте вы можете создавать и принимать участие в опросах.</p>
-            <a href="#" class="default-button">Создать опрос</a>
+            <div class="links-btns">
+                <a href="#" class="default-button">Все пользователи</a>
+                <a href="#" class="default-button">Все опросы</a>
+                <a href="#" class="default-button">Создать опрос</a>
+            </div>
         </div>
 
         <div class="poll-container">
