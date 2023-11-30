@@ -23,7 +23,7 @@ import { ref, onMounted } from 'vue';
       <h2>Пользователи</h2>
       <ul>
         <li v-for="user in users" :key="user.id" class="user-list">
-          <p>{{ user.name }}</p>
+          <RouterLink :to="{name: 'UserProfile', params: {id: user.id}}"><p>{{ user.name }}</p></RouterLink>
           <ul>
             <li v-for="role in user.roles" :key="role.id">
               <span v-if="role.name == 'ROLE_USER'">Обычный Пользователь</span>

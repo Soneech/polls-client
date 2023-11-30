@@ -1,4 +1,4 @@
-.users-carts {
+.users-carts, .user-block {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,4 +11,13 @@
     padding: 25px;
     width: 350px;
     margin-right: 40px;
+}
+
+.user-block {
+    box-shadow: 0 0 10px rgba(15, 10, 5, 0.1);
+    border-radius: 2px;
+    padding: 30px;
+    width: 550px;
+    margin: auto;
+    margin-top: 15px;
 }

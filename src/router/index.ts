@@ -4,6 +4,7 @@ import HomeVue from '@/views/HomeView.vue';
 import LoginVue from '@/views/LoginView.vue';
 import RegistrationVue from '@/views/RegistrationView.vue';
 import UsersVue from '@/views/UsersView.vue';
+import UserProfileVue from '@/views/UserProfileView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -11,28 +12,33 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Приветствие',
+      name: 'Greeting',
       component: DefaultVue
     },
     {
       path: '/home',
-      name: 'Главная',
+      name: 'Home',
       component: HomeVue
     },
     {
       path: '/auth/login',
-      name: 'Вход в аккаунт',
+      name: 'Login',
       component: LoginVue
     },
     {
       path: '/auth/registration',
-      name: 'Регистрация',
+      name: 'Registration',
       component: RegistrationVue
     },
     {
       path: '/users',
-      name: 'Пользователи',
+      name: 'Users',
       component: UsersVue
+    },
+    {
+      path: '/users/:id',
+      name: 'UserProfile',
+      component: UserProfileVue
     }
   ]
 });

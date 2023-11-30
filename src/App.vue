@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { RouterLink, RouterView } from 'vue-router';
-import { useAuthStore } from './stores/auth';
+    import { useAuthStore } from './stores/auth';
 
     const auth = useAuthStore();
 
@@ -23,11 +23,6 @@ import { useAuthStore } from './stores/auth';
                 signInBtn.style.visibility = "visible";
                 signUpBtn.style.visibility = "visible";
             }
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-            let button = document.getElementById('sign-in-btn');
-            localStorage.getItem('username') ? button.style.visibility = "hidden" : button.style.visibility = "visible";
     });
 
 </script>
