@@ -1,0 +1,14 @@
+.users-carts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-list {
+    box-shadow: 0 0 10px rgba(15, 10, 5, 0.1);
+    border-radius: 2px;
+    margin-bottom: 25px;
+    padding: 25px;
+    width: 350px;
+    margin-right: 40px;
+}

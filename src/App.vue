@@ -35,7 +35,7 @@ import { useAuthStore } from './stores/auth';
 <template>
     <header>
         <div class="header-container">
-            <h1 class="logo-text"><RouterLink to="/">Опросник</RouterLink></h1>
+            <h1 class="logo-text"><RouterLink to="/home">Опросничек</RouterLink></h1>
             <div class="navigation">
                 <ul>
                     <li><RouterLink to="/auth/login" class="header-button" id="sign-in-btn">Войти</RouterLink></li>

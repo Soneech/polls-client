@@ -7,6 +7,7 @@ body {
 
 h1, h2, .logo-text {
     font-weight: normal;
+    text-align: center;
 }
 
 a {
@@ -35,7 +36,7 @@ header {
     color: #ffffff;
 }
 
-.navigation ul {
+ul {
     list-style: none;
 }
 
@@ -111,5 +112,10 @@ header {
     width: 580px;
     margin: auto;
     margin-top: 35px;
+}
+
+.auth-links {
+    text-decoration: underline;
+    color: black;
 }
 

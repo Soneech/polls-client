@@ -7,7 +7,7 @@ export const useAuthStore = defineStore({
         return {
             username: localStorage.getItem('username') ? JSON.parse(localStorage.getItem('username')!) : null,
             token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')!) : null, 
-            loginSuccessReturnUrl: '/',
+            loginSuccessReturnUrl: '/home',
             registrationSuccessReturnUrl: '/auth/login'
         }
     },
@@ -66,7 +66,7 @@ export const useAuthStore = defineStore({
 
             localStorage.removeItem('username');
             localStorage.removeItem('token');
-            router.push('/auth/login');
+            router.push('/home');
 
             let logoutBtn = document.getElementById('logout-btn');
             logoutBtn.style.visibility = "hidden";
