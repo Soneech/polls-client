@@ -5,6 +5,9 @@ import LoginVue from '@/views/LoginView.vue';
 import RegistrationVue from '@/views/RegistrationView.vue';
 import UsersVue from '@/views/UsersView.vue';
 import UserProfileVue from '@/views/UserProfileView.vue';
+import PollsVue from '@/views/PollsView.vue';
+import PollPageVue from '@/views/PollPageView.vue';
+
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -39,6 +42,16 @@ const router = createRouter({
       path: '/users/:id',
       name: 'UserProfile',
       component: UserProfileVue
+    },
+    {
+      path: '/polls',
+      name: 'Polls',
+      component: PollsVue
+    },
+    {
+      path: '/polls/:id',
+      name: 'PollPage',
+      component: PollPageVue
     }
   ]
 });

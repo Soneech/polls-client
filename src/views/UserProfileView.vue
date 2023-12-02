@@ -3,25 +3,34 @@
     import { useRoute } from 'vue-router';
     import { ref, onMounted } from 'vue';
 
-    interface UserData {
-        name: string;
-        email: string;
-        roles: Role[];
+    interface User {
+        name: string,
+        email: string,
+        roles: Role[],
+        created_polls: Poll[],
+        polls_in_which_voted: Poll[]
     }
 
     interface Role {
-        id: number;
-        name: string;
+        id: number,
+        name: string
+    }
+
+    interface Poll {
+        id: number,
+        theme: string
     }
 
     interface Error {
-        message: string;
+        message: string
     }
 
-    const user = ref<UserData>({
+    const user = ref<User>({
         name: '',
         email: '',
         roles: [],
+        created_polls: [],
+        polls_in_which_voted: []
     });
 
     const error = ref<Error>({
@@ -58,9 +67,9 @@
 
         <div v-else class="user-block">
             <div class="user-cart">
-            <p class="user-name">{{ user.name }}</p>
+            <p class="user-name"><b>{{ user.name }}</b></p>
             <p class="user-email" v-if="user.email">{{ user.email }}</p>
-            <p>Роли:</p>
+            <p><b>Роли:</b></p>
             <div class="user-roles">
                 <p v-for="role in user.roles" :key="role.id">
                 <span v-if="role.name == 'ROLE_USER'">Обычный Пользователь</span>
@@ -68,9 +77,11 @@
                 </p>
             </div>
 
-            <p>Созданные опросы:</p>
+            <p><b>Созданные опросы:</b></p>
+            <RouterLink :to="{name: 'PollPage', params: {id: poll.id}}" class="poll-name" v-for="poll in user.created_polls"><p>{{ poll.theme }}</p></RouterLink>
 
-            <p>Опросы, в которых принимается участие:</p>
+            <p><b>Опросы, в которых принимается участие:</b></p>
+            <RouterLink :to="{name: 'PollPage', params: {id: poll.id}}" class="poll-name" v-for="poll in user.polls_in_which_voted"><p>{{ poll.theme }}</p></RouterLink>
             </div>
         </div>
         

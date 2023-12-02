@@ -8,14 +8,14 @@
             <p>На Нашем сайте Вы можете принимать участие в опросах, а также становиться автором!</p>
             <div class="links-btns">
                 <RouterLink to="/users" class="default-button">Все пользователи</RouterLink>
-                <a href="#" class="default-button">Все опросы</a>
+                <RouterLink to="/polls" class="default-button">Все опросы</RouterLink>
                 <a href="#" class="default-button">Создать опрос</a>
             </div>
         </div>
 
-        <div class="poll-container">
+        <div class="home-poll-container">
             <h2>Как Вам Наш Сервис?</h2>
-            <form class ="poll-form">   
+            <form class ="home-poll-form">   
                 <label>Выберите вариант ответа:</label><br>
                 
                 <div class="answers-container">

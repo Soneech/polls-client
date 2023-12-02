@@ -12,6 +12,7 @@ h1, h2, .logo-text, .error-message {
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 .header-container {
@@ -63,13 +64,13 @@ ul {
     margin-bottom: 20px;
 }
 
-.poll-container, .poll-form {
+.home-poll-container, .home-poll-form {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.poll-form .default-button {
+.home-poll-form .default-button {
     margin-top: 5px;
 }
 
