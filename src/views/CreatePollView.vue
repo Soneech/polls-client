@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { useAuthStore } from '@/stores/auth';
-    import { ref, onMounted } from 'vue';
+    import { ref } from 'vue';
 
     const auth = useAuthStore();
     const token = auth.token;
@@ -63,7 +63,7 @@
         else {
             error.value = data;
         }
-        
+
         openModalWindow();
     }
 

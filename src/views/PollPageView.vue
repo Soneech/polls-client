@@ -134,12 +134,15 @@
 
             const data = await response.json();
             if (response.status == 200) {
+                voteError.value.message = '';
                 success.value = data;
             }
             else {
+                success.value.message = '';
                 voteError.value = data;
             }
         }
+        openVoteMessageWindow();
     }
     
 </script>
@@ -171,7 +174,7 @@
                             </div>
                         </div>
                 
-                        <button @click="openVoteMessageWindow" type="submit" class ="default-button">Отправить</button>
+                        <button type="submit" class ="default-button">Отправить</button>
                     </form>
 
                     <div :class="{ 'modal': true, 'visible': isVoterModalVisible }">
@@ -184,8 +187,8 @@
 
                     <div :class="{ 'modal': true, 'visible': isVoteModalVisible }">
                         <button @click="closeVoteMessageWindow(success.message ? true: false)">x</button>
-                        <p v-if="voteError.message">{{ voteError.message }}</p>
-                        <p v-else-if="success.message">{{ success.message }}</p>
+                        <p v-if="voteError.message.length > 0">{{ voteError.message }}</p>
+                        <p v-else-if="success.message.length > 0">{{ success.message }}</p>
                         
                         <p v-else>Сначала нужно выбрать вариант ответа :)</p>
                     </div>
