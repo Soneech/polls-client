@@ -189,6 +189,7 @@
                         <button @click="closeVoteMessageWindow(success.message ? true: false)">x</button>
                         <p v-if="voteError.message">{{ voteError.message }}</p>
                         <p v-if="success.message">{{ success.message }}</p>
+                        <p v-else>Сначала нужно выбрать вариант ответа :)</p>
                     </div>
 
                     <div class="overlay" :class="{ 'visible': isVoteModalVisible || isVoterModalVisible }"></div>

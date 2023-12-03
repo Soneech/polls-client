@@ -54,3 +54,9 @@
     border: 0px;
     cursor: pointer;
 }
+
+.create-poll-form-block, .create-poll-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

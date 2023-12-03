@@ -9,7 +9,7 @@
             <div class="links-btns">
                 <RouterLink to="/users" class="default-button">Все пользователи</RouterLink>
                 <RouterLink to="/polls" class="default-button">Все опросы</RouterLink>
-                <a href="#" class="default-button">Создать опрос</a>
+                <RouterLink to="/polls/create" class="default-button">Создать опрос</RouterLink>
             </div>
         </div>
 
