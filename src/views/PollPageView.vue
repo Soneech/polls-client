@@ -48,7 +48,7 @@
         answers: []
     });
 
-    const error = ref<Error>({
+    const pollNotFoundError = ref<Error>({
         message: ''
     });
 
@@ -73,10 +73,8 @@
             poll.value = data;
         }
         else {
-            error.value = data;
+            pollNotFoundError.value = data;
         }
-
-        console.log(error.value);
     });
 
     var clickedAnswer: Answer = {
@@ -93,15 +91,6 @@
     const closeVoterWindow = () => {
         isVoterModalVisible.value = false;
     };
-
-
-    const voteError = ref<Error>({
-        message: ''
-    })
-
-    const success = ref<Success>({
-        message: ''
-    });
 
     const openVoteMessageWindow = () => {
         isVoteModalVisible.value = true;
@@ -123,6 +112,14 @@
         answer_id: 0,
         poll_id: Number(pollId)
     }
+
+    const success = ref<Success>({
+        message: ''
+    });
+
+    const voteError = ref<Error>({
+        message: ''
+    })
 
     async function onSubmit() {
         if (vote.answer_id != 0) {
@@ -149,7 +146,7 @@
 
 <template>
     <div class="main-content">
-        <p v-if="error.message" class="error-message">{{ error.message }}!</p>
+        <p v-if="pollNotFoundError.message" class="error-message">{{ pollNotFoundError.message }}!</p>
 
         <div v-else>
             <h2>Опрос от <RouterLink :to="{name: 'UserProfile', params: {id: poll.user.id}}">{{ poll.user.name }}</RouterLink></h2>
@@ -188,7 +185,8 @@
                     <div :class="{ 'modal': true, 'visible': isVoteModalVisible }">
                         <button @click="closeVoteMessageWindow(success.message ? true: false)">x</button>
                         <p v-if="voteError.message">{{ voteError.message }}</p>
-                        <p v-if="success.message">{{ success.message }}</p>
+                        <p v-else-if="success.message">{{ success.message }}</p>
+                        
                         <p v-else>Сначала нужно выбрать вариант ответа :)</p>
                     </div>
 

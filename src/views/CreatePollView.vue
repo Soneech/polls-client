@@ -7,16 +7,16 @@
 
     const isModalVisible = ref(false);
 
-    interface Error {
-        message: string
+    interface FieldsErrors {
+        messages: []
     }
 
     interface Success {
         message: string
     }
 
-    const error = ref<Error>({
-        message: ''
+    const error = ref<FieldsErrors>({
+        messages: []
     })
 
     const success = ref<Success>({
@@ -55,15 +55,16 @@
                 body: JSON.stringify(poll.value)
             });
 
-            const data = await response.json();
-            if (response.status == 200) {
-                success.value = data;
-            }
-            else {
-                error.value = data;
-            }
-
-        console.log(poll);
+        const data = await response.json();
+        if (response.status == 200) {
+            error.value.messages = []
+            success.value = data;
+        }
+        else {
+            error.value = data;
+        }
+        
+        openModalWindow();
     }
 
     function addAnswerInput() {
@@ -73,8 +74,6 @@
     function removeAnswerInput(index: number) {
         poll.value.answers.splice(index, 1);
     }
-
-
 </script>
 
 <template>
@@ -91,14 +90,14 @@
                     <button type="button" class="default-button" @click="removeAnswerInput(index)">Удалить</button>
                 </div>
 
-                <button @click="openModalWindow" type="submit" class ="default-button">Создать</button>
+                <button type="submit" class ="default-button">Создать</button>
             </form>
         </div>
 
         <div :class="{ 'modal': true, 'visible': isModalVisible }">
             <button @click="closeModalWindow">x</button>
-            <p v-if="success.message">{{ success.message }}</p>
-            <p v-else>{{ error.message }}</p>
+            <p v-if="error.messages.length > 0" v-for="message in error.messages">{{ message }}</p>
+            <p v-else>{{ success.message }}</p>
         </div>
 
         <div class="overlay" :class="{ 'visible': isModalVisible }"></div>

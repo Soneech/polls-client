@@ -8,7 +8,11 @@ export const useAuthStore = defineStore({
             username: localStorage.getItem('username') ? JSON.parse(localStorage.getItem('username')!) : null,
             token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')!) : null, 
             loginSuccessReturnUrl: '/home',
-            registrationSuccessReturnUrl: '/auth/login'
+            registrationSuccessReturnUrl: '/auth/login',
+            fieldsErrors: {messages: []},
+            loginErrors: {messages: []},
+            loginStatus: 0,
+            registrationStatus: 0
         }
     },
     actions: {
@@ -22,10 +26,13 @@ export const useAuthStore = defineStore({
             });
             
             if (response.status == 201) {
+                this.registrationStatus = 201;
                 router.push(this.registrationSuccessReturnUrl || '/')
             }
             else {
-                // TODO
+                this.registrationStatus = 400;
+                const data = await response.json();
+                this.fieldsErrors = data;
             }
         },
         async login(name: string, password: string) {
@@ -38,6 +45,7 @@ export const useAuthStore = defineStore({
             });
 
             if (response.status == 200) {
+                this.loginStatus = 200;
                 const data = await response.json();
                 const token = data.token;
                 
@@ -46,36 +54,24 @@ export const useAuthStore = defineStore({
                 
                 localStorage.setItem('username', JSON.stringify(name));
                 localStorage.setItem('token', JSON.stringify(token));
+
                 router.push(this.loginSuccessReturnUrl || '/');
-
-                let logoutBtn = document.getElementById('logout-btn');
-                logoutBtn.style.visibility = "visible";
-
-                let signInBtn = document.getElementById('sign-in-btn');
-                signInBtn.style.visibility = "hidden";
-
-                let signUpBtn = document.getElementById('sign-up-btn');
-                signUpBtn.style.visibility = "hidden";
             } else {
-                // TODO - вывод ошибок от сервера
+                this.loginStatus = 400;
+                const data = await response.json();
+                this.loginErrors = data;
             }
         },
         logout() {
+            this.loginStatus = 0;
+            this.registrationStatus = 0;
+
             this.username = null;
             this.token = null;
 
             localStorage.removeItem('username');
             localStorage.removeItem('token');
             router.push('/home');
-
-            let logoutBtn = document.getElementById('logout-btn');
-            logoutBtn.style.visibility = "hidden";
-
-            let signInBtn = document.getElementById('sign-in-btn');
-            signInBtn.style.visibility = "visible";
-
-            let signUpBtn = document.getElementById('sign-up-btn');
-            signUpBtn.style.visibility = "visible";
         }
     }
 });

@@ -1,17 +1,40 @@
 <script lang="ts" setup>
-    import App from '@/App.vue';
-import { useAuthStore } from '@/stores/auth';
-    import { reactive } from 'vue';
+    import { useAuthStore } from '@/stores/auth';
+    import { ref } from 'vue';
 
     const user = {
         name: '',
         password: ''
     }
 
-    function onSubmit() {
-        if (user.name != '' && user.password != '') {
-            useAuthStore().login(user.name, user.password);
+    const isModalVisible = ref(false);
+
+    async function onSubmit() {
+        await useAuthStore().login(user.name, user.password);
+        
+        if (useAuthStore().loginStatus == 200) {
+            let logoutBtn = document.getElementById('logout-btn');
+            logoutBtn.style.visibility = "visible";
+
+            let signInBtn = document.getElementById('sign-in-btn');
+            signInBtn.style.visibility = "hidden";
+
+            let signUpBtn = document.getElementById('sign-up-btn');
+            signUpBtn.style.visibility = "hidden";
         }
+        else {
+            openModalWindow();
+        }
+    }
+
+    function openModalWindow() {
+        if (useAuthStore().loginStatus == 400) {
+            isModalVisible.value = true;
+        }
+    }
+
+    function closeModalWindow() {
+        isModalVisible.value = false;
     }
 </script>
 
@@ -21,6 +44,14 @@ import { useAuthStore } from '@/stores/auth';
 
         <input type="text" id="name" class="form-input" placeholder="Логин" v-model="user.name">
         <input type="password" id="password" class="form-input" placeholder="Пароль" v-model="user.password">
+
         <button type="submit" class="default-button form-button">Войти</button>
     </form>
+
+    <div :class="{ 'modal': true, 'visible': isModalVisible }">
+        <button @click="closeModalWindow">x</button>
+        <p v-if="useAuthStore().loginStatus == 400" v-for="message in useAuthStore().loginErrors.messages">{{ message }}</p>
+    </div>
+
+    <div class="overlay" :class="{ 'visible': isModalVisible }"></div>
 </template>

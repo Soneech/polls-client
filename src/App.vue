@@ -6,6 +6,15 @@
 
     function logout() {
         auth.logout();
+
+        let logoutBtn = document.getElementById('logout-btn');
+        logoutBtn.style.visibility = "hidden";
+
+        let signInBtn = document.getElementById('sign-in-btn');
+        signInBtn.style.visibility = "visible";
+
+        let signUpBtn = document.getElementById('sign-up-btn');
+        signUpBtn.style.visibility = "visible";
     }
 
     document.addEventListener('DOMContentLoaded', function () {

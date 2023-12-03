@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="auth-block">
+    <div class="auth-block main-content">
         <LoginForm/>
     </div>
 </template>
