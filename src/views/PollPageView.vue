@@ -31,6 +31,9 @@
         message: string
     }
 
+    interface Success {
+        message: string
+    }
 
     const user: User = {
         id: 1,
@@ -55,7 +58,8 @@
     const route = useRoute();
     const pollId = route.params.id;
 
-    const isModalVisible = ref(false);
+    const isVoterModalVisible = ref(false);
+    const isVoteModalVisible = ref(false);
 
     onMounted(async () => {
         const response = await fetch('http://localhost:8080/polls/' + pollId, {
@@ -81,14 +85,66 @@
         votes: []
     };
     
-    const openModal = (answer: Answer) => {
+    const openVoterWindow = (answer: Answer) => {
         clickedAnswer = answer;
-        isModalVisible.value = true;
+        isVoterModalVisible.value = true;
     };
 
-    const closeModal = () => {
-        isModalVisible.value = false;
+    const closeVoterWindow = () => {
+        isVoterModalVisible.value = false;
     };
+
+
+    const voteError = ref<Error>({
+        message: ''
+    })
+
+    const success = ref<Success>({
+        message: ''
+    });
+
+    const openVoteMessageWindow = () => {
+        isVoteModalVisible.value = true;
+    };
+
+    const closeVoteMessageWindow = (isSuccess: boolean) => {
+        if (isSuccess) {
+            location.reload();
+        }
+        isVoteModalVisible.value = false;
+    };
+
+    interface VoteRequest {
+        answer_id: number,
+        poll_id: number
+    }
+
+    var vote: VoteRequest = {
+        answer_id: 0,
+        poll_id: Number(pollId)
+    }
+
+    async function onSubmit() {
+        if (vote.answer_id != 0) {
+            const response = await fetch('http://localhost:8080/polls/vote', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(vote)
+            });
+
+            const data = await response.json();
+            if (response.status == 200) {
+                success.value = data;
+            }
+            else {
+                voteError.value = data;
+            }
+        }
+    }
+    
 </script>
 
 <template>
@@ -106,30 +162,36 @@
                         poll.created_at.substring(0, 4) + " в " + poll.created_at.substring(11, 19)}}</p>
 
                 <div class="poll-container">
-                    <form class ="poll-form">   
+                    <form @submit.prevent="onSubmit" class ="poll-form">   
                         <div class="answers-container">
-                            <div v-for="answer in poll.answers" class="answer default-answer">
+                            <div v-for="answer in poll.answers" :key="answer.id" class="answer default-answer">
                                 <div class="answer-text">
-                                    <input type="radio" :id="answer.id.toString()" name="answer">
+                                    <input type="radio" :id="answer.id.toString()" v-model="vote.answer_id" :value="answer.id" name="answer">
                                     <label :for="answer.id.toString()">{{ answer.text }}</label>
                                 </div>
                                 
-                                <button type="button" @click="openModal(answer)" class="votes-count">{{ answer.votes.length }}</button>
+                                <button type="button" @click="openVoterWindow(answer)" class="votes-count">{{ answer.votes.length }}</button>
                             </div>
                         </div>
                 
-                        <input type="submit" class ="default-button" value="Отправить">
+                        <button @click="openVoteMessageWindow" type="submit" class ="default-button">Отправить</button>
                     </form>
 
-                    <div :class="{ 'modal': true, 'visible': isModalVisible }">
-                        <button @click="closeModal">x</button>
+                    <div :class="{ 'modal': true, 'visible': isVoterModalVisible }">
+                        <button @click="closeVoterWindow">x</button>
                         <p>Проголосовали:</p>
                         <RouterLink :to="{name: 'UserProfile', params: {id: vote.user.id}}" v-for="vote in clickedAnswer.votes">
                             <p>{{ vote.user.name }}</p>
                         </RouterLink>
                     </div>
 
-                    <div class="overlay" :class="{ 'visible': isModalVisible }"></div>
+                    <div :class="{ 'modal': true, 'visible': isVoteModalVisible }">
+                        <button @click="closeVoteMessageWindow(success.message ? true: false)">x</button>
+                        <p v-if="voteError.message">{{ voteError.message }}</p>
+                        <p v-if="success.message">{{ success.message }}</p>
+                    </div>
+
+                    <div class="overlay" :class="{ 'visible': isVoteModalVisible || isVoterModalVisible }"></div>
                 </div>
             </div>
         </div>
