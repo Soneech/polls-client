@@ -28,6 +28,9 @@
     };
 
     const closeModalWindow = () => {
+        if (success.value.message.length > 0) {
+            location.reload();
+        }
         isModalVisible.value = false;
     };
 
@@ -35,14 +38,19 @@
         text: string
     }
 
+    interface Question {
+        text: string,
+        answers: Answer[]
+    }
+
     interface Poll {
         theme: string,
-        answers: Answer[]
+        questions: Question[]
     }
 
     const poll = ref<Poll> ({
         theme: '',
-        answers: []
+        questions: []
     });
 
     async function onSubmit() {
@@ -67,12 +75,20 @@
         openModalWindow();
     }
 
-    function addAnswerInput() {
-        poll.value.answers.push({ text: '' });
+    function addQuestionBlock() {
+        poll.value.questions.push({text: '', answers: []})
     }
 
-    function removeAnswerInput(index: number) {
-        poll.value.answers.splice(index, 1);
+    function removeQuestionBlock(q_index: number) {
+        poll.value.questions.splice(q_index, 1);
+    }
+
+    function addAnswerInput(q_index: number) {
+        poll.value.questions[q_index].answers.push({text: ''});
+    }
+
+    function removeAnswerInput(q_index: number, a_index: number) {
+        poll.value.questions[q_index].answers.splice(a_index, 1);
     }
 </script>
 
@@ -81,21 +97,34 @@
         <div class="create-poll-form-block">
             <h2>Создание опроса</h2>
             <form @submit.prevent="onSubmit" class ="create-poll-form">
-                <input type="text" id="theme" class="form-input" placeholder="Тема" v-model="poll.theme"><br>
+                <input type="text" id="theme" class="form-input poll-theme-create" placeholder="Тема" v-model="poll.theme"><br>
                 
-                <button type="button" class ="default-button" @click="addAnswerInput">Добавить ответ</button>
+                <div class="question-block" v-for="(question, q_index) in poll.questions" :key="q_index">
+                    <br>
 
-                <div v-for="(answer, index) in poll.answers" :key="index" class="answer-input-container">
-                    <input type="text" :id="'answer_' + index" class="form-input" placeholder="Вариант ответа" v-model="answer.text"/>
-                    <button type="button" class="default-button" @click="removeAnswerInput(index)">Удалить</button>
+                    <input type="text" :id="'question_' + q_index" class="form-input question-text-create" placeholder="Текст вопроса" v-model="question.text"/>
+                    <button type="button" class ="default-button delete-btn" @click="removeQuestionBlock(q_index)">✖</button>
+
+                    <div v-for="(answer, a_index) in question.answers" :key="a_index" class="answer-input-container">
+                        <input type="text" :id="'answer_' + a_index" class="form-input" placeholder="Вариант ответа" v-model="answer.text"/>
+                        <button type="button" class="default-button delete-btn" @click="removeAnswerInput(q_index, a_index)">✖</button>
+                    </div>
+
+                    <button type="button" class ="default-button create-polls-btn" @click="addAnswerInput(q_index)">Добавить ответ</button>
+                    
+                    <br>
                 </div>
-
-                <button type="submit" class ="default-button">Создать</button>
+                
+                <div class="create-poll-main-btns">
+                    <button type="button" class ="default-button" @click="addQuestionBlock">Добавить вопрос</button>
+                    <button type="submit" class ="default-button">Создать</button>  
+                </div>
+                
             </form>
         </div>
 
         <div :class="{ 'modal': true, 'visible': isModalVisible }">
-            <button @click="closeModalWindow">x</button>
+            <button @click="closeModalWindow">✖</button>
             <p v-if="error.messages.length > 0" v-for="message in error.messages">{{ message }}</p>
             <p v-else>{{ success.message }}</p>
         </div>

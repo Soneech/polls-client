@@ -39,7 +39,7 @@ import { ref } from 'vue';
     </form>
 
     <div :class="{ 'modal': true, 'visible': isModalVisible }">
-        <button @click="closeModalWindow">x</button>
+        <button @click="closeModalWindow">✖</button>
         <p v-if="useAuthStore().registrationStatus == 400" v-for="message in useAuthStore().fieldsErrors.messages">{{ message }}</p>
     </div>
 

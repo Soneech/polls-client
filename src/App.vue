@@ -50,8 +50,17 @@
         </div>
     </header>
 
-    <div class="routes">
+    <div class="wrapper">
         <RouterView/>
+
+        <footer>
+            <div class="footer-container">
+                <a href="https://vk.com/soneech" class="footer-link" id="sign-in-btn">VK</a>
+                <a href="https://github.com/Soneech" class="footer-link" id="sign-up-btn">GitHub</a>
+                <a href="https://telegram.me/sonechous" class="footer-link" id="logout-btn">Telegram</a>
+            </div>
+        </footer>
     </div>
+    
     
 </template>
