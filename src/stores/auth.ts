@@ -1,5 +1,6 @@
 import router from "@/router";
 import { defineStore } from "pinia";
+import { useAuthElementsStore } from '@/stores/authElements';
 
 export const useAuthStore = defineStore({
     id: 'auth',
@@ -55,6 +56,8 @@ export const useAuthStore = defineStore({
                 localStorage.setItem('username', JSON.stringify(name));
                 localStorage.setItem('token', JSON.stringify(token));
 
+                useAuthElementsStore().loginAction();
+
                 router.push(this.loginSuccessReturnUrl || '/');
             } else {
                 this.loginStatus = 400;
@@ -71,6 +74,9 @@ export const useAuthStore = defineStore({
 
             localStorage.removeItem('username');
             localStorage.removeItem('token');
+
+            useAuthElementsStore().logoutAction();
+
             router.push('/home');
         }
     }

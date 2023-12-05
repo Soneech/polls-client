@@ -12,7 +12,11 @@ import { ref, onMounted } from 'vue';
                 'Authorization': 'Bearer ' + token
             }
         });
-
+        
+        if (response.status == 401) {
+          useAuthStore().logout();
+        }
+        
         const data = await response.json();
         users.value = data;
     })

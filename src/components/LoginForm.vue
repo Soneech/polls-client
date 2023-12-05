@@ -12,17 +12,7 @@
     async function onSubmit() {
         await useAuthStore().login(user.name, user.password);
         
-        if (useAuthStore().loginStatus == 200) {
-            let logoutBtn = document.getElementById('logout-btn');
-            logoutBtn.style.visibility = "visible";
-
-            let signInBtn = document.getElementById('sign-in-btn');
-            signInBtn.style.visibility = "hidden";
-
-            let signUpBtn = document.getElementById('sign-up-btn');
-            signUpBtn.style.visibility = "hidden";
-        }
-        else {
+        if (useAuthStore().loginStatus != 200) {
             openModalWindow();
         }
     }

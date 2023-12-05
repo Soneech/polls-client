@@ -33,7 +33,7 @@ a {
     margin: auto;
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 60px;
     justify-content: space-between;
 }
 
@@ -58,7 +58,8 @@ footer {
     left: 0;
     width: 100%;
     background-color: #1a1a1a;
-    height: 160px;
+    height: 110px;
+    margin-bottom: -160px;
 }
 
 .footer-link {
@@ -84,8 +85,7 @@ ul {
 }
 
 .main-content {
-    padding: 50px 0;
-    padding-bottom: 190px;
+    padding-top: 50px;
 }
 
 .main-content h2 {

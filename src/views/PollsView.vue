@@ -13,6 +13,10 @@
             }
         });
 
+        if (response.status == 401) {
+          useAuthStore().logout();
+        }
+
         const data = await response.json();
         polls.value = data;
     })

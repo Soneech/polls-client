@@ -75,7 +75,11 @@
         });
 
         const data = await response.json();
-        if (response.status == 200) {
+
+        if (response.status == 401) {
+          useAuthStore().logout();
+        }
+        else if (response.status == 200) {
             poll.value = data;
         }
         else {
@@ -136,8 +140,6 @@
     })
 
     async function onSubmit() {
-        console.log(votesRequest);
-
         const response = await fetch('http://localhost:8080/polls/vote', {
             method: 'POST',
             headers: {
@@ -148,7 +150,11 @@
         });
 
         const data = await response.json();
-        if (response.status == 200) {
+
+        if (response.status == 401) {
+          useAuthStore().logout();
+        }
+        else if (response.status == 200) {
             voteError.value.message = '';
             success.value = data;
         }

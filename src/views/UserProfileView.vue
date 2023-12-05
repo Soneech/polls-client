@@ -51,7 +51,11 @@
         });
 
         const data = await response.json();
-        if (response.status == 200) {
+        
+        if (response.status == 401) {
+          useAuthStore().logout();
+        }
+        else if (response.status == 200) {
             user.value = data;
         }
         else {
