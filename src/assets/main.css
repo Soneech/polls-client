@@ -157,3 +157,9 @@ ul {
     text-decoration: underline;
     color: black;
 }
+
+.home-img {
+    width: 23%;
+    height: 23%;
+    margin-top: 100px;
+}

@@ -14,31 +14,7 @@
         </div>
 
         <div class="home-poll-container">
-            <h2>Как Вам Наш Сервис?</h2>
-            <form class ="home-poll-form">   
-                <label>Выберите вариант ответа:</label><br>
-                
-                <div class="answers-container">
-                    <div class="answer">
-                        <input type="radio" id="answer1" name="answer" value="Отлично">
-                        <label for="answer1">Чудесно</label><br>
-                    </div>
-                    <div class="answer">
-                        <input type="radio" id="answer2" name="answer" value="Хорошо">
-                        <label for="answer2">Прекрасно</label><br>
-                    </div>
-                    <div class="answer">
-                        <input type="radio" id="answer3" name="answer" value="Удовлетворительно">
-                        <label for="answer3">Есть вопросики</label><br>
-                    </div>
-                    <div class="answer">
-                        <input type="radio" id="answer4" name="answer" value="Неудовлетворительно">
-                        <label for="answer4">Мяу</label><br>
-                    </div>
-                </div>
-        
-                <input type="submit" class ="default-button" value="Отправить">
-            </form>
+            <img class="home-img" src="../components/image/home-img.png">
         </div>
     </div>
 </template>
